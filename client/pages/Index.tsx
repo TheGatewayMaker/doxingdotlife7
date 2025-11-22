@@ -591,7 +591,7 @@ export default function Index() {
 
         {/* Hot & Recent Posts */}
         <div className="max-w-7xl mx-auto px-4 py-16">
-          <div className="mb-12">
+          <div className="mb-12 animate-fadeIn">
             <h2 className="text-5xl md:text-6xl font-black mb-3">
               {filteredPosts.length === 0
                 ? "No Posts Found"
@@ -607,10 +607,12 @@ export default function Index() {
           {displayedPosts.length > 0 ? (
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
-                {displayedPosts.map((post) => (
+                {displayedPosts.map((post, idx) => (
                   <div
                     key={post.id}
-                    className="group bg-card border border-border rounded-xl overflow-hidden hover:border-accent hover:shadow-xl transition-all duration-300 cursor-pointer hover:-translate-y-1"
+                    onClick={() => navigate(`/post/${post.id}`)}
+                    className="group bg-card border border-border rounded-xl overflow-hidden hover:border-accent hover:shadow-xl transition-all duration-300 cursor-pointer hover:-translate-y-1 animate-fadeIn"
+                    style={{ animationDelay: `${idx * 0.05}s` }}
                   >
                     {post.thumbnail && (
                       <div className="w-full h-40 bg-muted overflow-hidden">
@@ -631,17 +633,17 @@ export default function Index() {
                       <div className="flex flex-wrap gap-2">
                         {post.country && (
                           <span className="inline-block bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-medium">
-                            {post.country}
+                            🌍 {post.country}
                           </span>
                         )}
                         {post.city && (
                           <span className="inline-block bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-medium">
-                            {post.city}
+                            🏙️ {post.city}
                           </span>
                         )}
                         {post.server && (
                           <span className="inline-block bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-medium">
-                            {post.server}
+                            🖥️ {post.server}
                           </span>
                         )}
                       </div>
