@@ -201,69 +201,69 @@ export default function UppostPanel() {
           <form onSubmit={handleUpload} className="bg-card border border-border rounded-xl p-10 space-y-8">
             {/* Title */}
             <div>
-              <label className="block text-sm font-semibold mb-2">
-                Title <span className="text-destructive">*</span>
+              <label className="block text-sm font-bold mb-3 text-foreground">
+                Post Title <span className="text-destructive">*</span>
               </label>
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-4 py-2 bg-background border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-                placeholder="Post title"
+                className="w-full px-4 py-3 bg-background border border-border hover:border-accent/50 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-colors"
+                placeholder="Enter post title"
               />
             </div>
 
             {/* Description */}
             <div>
-              <label className="block text-sm font-semibold mb-2">
+              <label className="block text-sm font-bold mb-3 text-foreground">
                 Description <span className="text-destructive">*</span>
               </label>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full px-4 py-2 bg-background border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent resize-none"
-                rows={4}
-                placeholder="Post description"
+                className="w-full px-4 py-3 bg-background border border-border hover:border-accent/50 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent resize-none transition-colors"
+                rows={5}
+                placeholder="Enter post description"
               />
             </div>
 
-            {/* Country */}
-            <div>
-              <label className="block text-sm font-semibold mb-2">Country</label>
-              <input
-                type="text"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                className="w-full px-4 py-2 bg-background border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-                placeholder="Country (optional)"
-              />
-            </div>
+            {/* Location Info */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Country */}
+              <div>
+                <label className="block text-sm font-bold mb-3 text-foreground">Country</label>
+                <input
+                  type="text"
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                  className="w-full px-4 py-3 bg-background border border-border hover:border-accent/50 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-colors"
+                  placeholder="(optional)"
+                />
+              </div>
 
-            {/* City */}
-            <div>
-              <label className="block text-sm font-semibold mb-2">City</label>
-              <input
-                type="text"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                className="w-full px-4 py-2 bg-background border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-                placeholder="City (optional)"
-              />
-            </div>
+              {/* City */}
+              <div>
+                <label className="block text-sm font-bold mb-3 text-foreground">City</label>
+                <input
+                  type="text"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  className="w-full px-4 py-3 bg-background border border-border hover:border-accent/50 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-colors"
+                  placeholder="(optional)"
+                />
+              </div>
 
-            {/* Server */}
-            <div>
-              <label className="block text-sm font-semibold mb-2">Server Name</label>
-              <input
-                type="text"
-                value={server}
-                onChange={(e) => setServer(e.target.value)}
-                className="w-full px-4 py-2 bg-background border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-                placeholder="Server name (optional)"
-              />
-              <p className="text-xs text-muted-foreground mt-1">
-                This server will be added to the servers list
-              </p>
+              {/* Server */}
+              <div>
+                <label className="block text-sm font-bold mb-3 text-foreground">Server Name</label>
+                <input
+                  type="text"
+                  value={server}
+                  onChange={(e) => setServer(e.target.value)}
+                  className="w-full px-4 py-3 bg-background border border-border hover:border-accent/50 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-colors"
+                  placeholder="(optional)"
+                />
+              </div>
             </div>
 
             {/* Media Upload */}
