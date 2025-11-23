@@ -62,21 +62,20 @@ export function createServer() {
   app.get("/api/servers", handleGetServers);
 
   // Media proxy endpoint for additional CORS support
-  app.get("/api/media/:postId/*", async (req, res) => {
+  app.get("/api/media/:postId/:fileName", async (req, res) => {
     try {
-      const { postId } = req.params;
-      const filePath = req.params[0];
+      const { postId, fileName } = req.params;
 
-      if (!postId || !filePath) {
+      if (!postId || !fileName) {
         return res.status(400).json({ error: "Invalid request" });
       }
 
       // Validate that only legitimate paths are accessed
-      if (filePath.includes("..") || filePath.includes("//")) {
+      if (fileName.includes("..") || fileName.includes("/")) {
         return res.status(403).json({ error: "Invalid file path" });
       }
 
-      const mediaUrl = `${process.env.R2_PUBLIC_URL || `https://${process.env.R2_BUCKET_NAME}.${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`}/posts/${postId}/${filePath}`;
+      const mediaUrl = `${process.env.R2_PUBLIC_URL || `https://${process.env.R2_BUCKET_NAME}.${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`}/posts/${postId}/${fileName}`;
 
       res.set({
         "Access-Control-Allow-Origin": "*",
@@ -97,7 +96,11 @@ export function createServer() {
         "Cache-Control": "public, max-age=31536000",
       });
 
-      response.body?.pipe(res);
+      if (response.body) {
+        response.body.pipeTo(res as any);
+      } else {
+        res.status(500).json({ error: "No response body" });
+      }
     } catch (err) {
       console.error("Media proxy error:", err);
       res.status(500).json({ error: "Failed to fetch media" });
